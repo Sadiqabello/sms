@@ -1,0 +1,27 @@
+﻿@model Lecturer
+@{
+    ViewData["Title"] = "Edit Lecturer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Edit Student</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form class="row g-3" method="post">
+            <div class="col-12">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input type="text" class="form-control form-control-lg" asp-for="Name" placeholder="Name" value="@Model.Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input type="email" class="form-control form-control-lg" asp-for="Email" placeholder="student@mail.com" value="@Model.Email">
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-lg btn-primary">Update</button>
+            </div>
+        </form>
+    </div>
+</div>

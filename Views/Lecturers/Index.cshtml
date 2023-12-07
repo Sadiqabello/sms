@@ -1,0 +1,120 @@
+﻿@model List<Lecturer>
+@{
+    ViewData["Title"] = "Lecturers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Lecturers <a class="btn btn-primary" asp-controller="Lecturers" asp-action="Create">Add</a></h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th colspan="2">Controls</th>
+    </tr>
+
+    @{
+        int counter = 1;
+    }
+    @foreach (Lecturer lecturer in Model)
+    {
+        var delFormId = "deleteForm" + lecturer.Id;
+        <tr>
+            <td>@counter</td>
+            <td>@lecturer.Name</td>
+            <td>@lecturer.Email</td>
+
+            <td>
+                <a asp-action="Edit" class="btn btn-warning" asp-controller="Lecturers" asp-route-id="@lecturer.Id">Edit</a>
+            </td>
+            <!-- Add a link for delete -->
+            <td>
+                <form method="post" asp-action="Delete" asp-controller="Lecturers" asp-route-id="@lecturer.Id" id="@delFormId" onsubmit="sendForm(event)" class="delete-form">
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+            </td>
+        </tr>
+
+            counter += 1;
+        }
+
+</table>
+
+@*@section Scripts {
+        <script>
+
+            function sendForm(e) {
+                e.preventDefault();
+                var xx = e.target;
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const myform = document.getElementById(xx.id);
+                        myform.submit();
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                    }
+                });
+            }
+        </script>
+
+    }*@
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(".delete-form").on("submit", function (e) {
+                e.preventDefault();
+                var form = $(this);
+                var url = form.attr("action");
+
+                Swal.fire({
+                    title: "Are you sure you want to delete a lecturer?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: form.serialize(),
+                            success: function () {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "ALecturer has been deleted.",
+                                    icon: "success"
+                                }).then(() => {
+                                    // Reload the page
+                                    location.reload();
+                                });
+                            },
+                            error: function () {
+                                // Handle errors if needed
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: "An error occurred while deleting.",
+                                    icon: "error"
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });</script>
+}
+

@@ -1,0 +1,37 @@
+﻿@model Course
+@{
+    ViewData["Title"] = "Create Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Create Course</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form class="row g-3" method="post">
+            <div class="col-12">
+                <label asp-for="CourseTitle" class="form-label">Course Title</label>
+                <input type="text" class="form-control form-control-lg" asp-for="CourseTitle" placeholder="Course Title">
+                <span class="text-danger" asp-validation-for="CourseTitle"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="CourseCode" class="form-label">Course Code</label>
+                <input type="text" class="form-control form-control-lg" asp-for="CourseCode" placeholder="Course Code">
+                <span class="text-danger" asp-validation-for="CourseCode"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="CreditUnit" class="form-label">Credit Unit</label>
+                <input type="text" class="form-control form-control-lg" asp-for="CreditUnit" placeholder="Credit Unit">
+                <span class="text-danger" asp-validation-for="CreditUnit"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="CourseDescription" class="form-label">Course Description</label>
+                <textarea class="form-control form-control-lg" asp-for="CourseDescription" placeholder="Enter Course Description"></textarea>
+                <span class="text-danger" asp-validation-for="CourseDescription"></span>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-lg btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+</div>

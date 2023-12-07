@@ -1,0 +1,41 @@
+﻿@model Lecturer
+@{
+    ViewData["Title"] = "Create Lecturer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Create Lecturer</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form class="row g-3" method="post" onsubmit="sendForm(event)">
+            <div class="col-12">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input type="text" class="form-control form-control-lg" asp-for="Name" placeholder="Lecturer Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input type="email" class="form-control form-control-lg" asp-for="Email" placeholder="lecturer@mail.com">
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-lg btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        //function sendForm(e) {
+        //    Swal.fire({
+        //        position: "top-end",
+        //        icon: "success",
+        //        title: "Your work has been saved",
+        //        showConfirmButton: false,
+        //        timer: 1500
+        //    });
+        //}
+    </script>
+}
